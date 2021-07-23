@@ -1,0 +1,40 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "reseed": "php artisan config:cache && php artisan migrate:fresh --seed && php artisan db:seed --class=TodaySeeder && php artisan db:seed --class=ProjectSeeder && php artisan db:seed --class=UpcomingSeeder"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "bootstrap-css-only": "^4.4.1",
+        "browser-sync": "^2.27.4",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "jquery": "^3.6",
+        "laravel-mix": "^6.0.6",
+        "laravel-mix-blade-pug": "^1.0.5",
+        "lodash": "^4.17.19",
+        "node-sass": "^6.0.1",
+        "popper.js": "^1.16.1",
+        "pug": "^3.0.2",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.11",
+        "sass-loader": "^10.2.0",
+        "stylus-loader": "^6.1.0",
+        "vue": "^2.6.14",
+        "vue-indent-pug-loader": "^0.1.1",
+        "vue-loader": "^15.9.7",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "mdbvue": "^6.7.2",
+        "nib": "^1.1.2",
+        "vuex": "^3.6.2"
+    }
+}

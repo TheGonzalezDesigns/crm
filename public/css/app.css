@@ -1,0 +1,32 @@
+.tb1 {
+  background: #2d3748;
+  background: rgba(45,55,72,0.6);
+}
+.tb2 {
+  background: #6a85b6;
+  background: rgba(106,133,182,0.6);
+}
+.tb3 {
+  background: #faebd7;
+  background: rgba(250,235,215,0.6);
+}
+.tb4 {
+  background: #7fffd4;
+  background: rgba(127,255,212,0.6);
+}
+.highlight {
+  background: rgba(255,0,0,0.8) !important;
+}
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+#app {
+  min-height: 100vh;
+}
+.flex-cheat {
+  display: flex;
+}
+
