@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-	"live": "npm run dev && npm run prod && npm run watch-poll"
+	"live": "npm run dev && npm run prod && npm run watch-poll",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
