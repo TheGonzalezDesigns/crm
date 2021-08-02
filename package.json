@@ -9,7 +9,8 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "reseed": "php artisan config:cache && php artisan migrate:fresh --seed && php artisan db:seed --class=TodaySeeder && php artisan db:seed --class=ProjectSeeder && php artisan db:seed --class=UpcomingSeeder"
+        "reseed": "php artisan config:cache && php artisan migrate:fresh --seed && php artisan db:seed --class=TodaySeeder && php artisan db:seed --class=ProjectSeeder && php artisan db:seed --class=UpcomingSeeder",
+        "clean":  "git clean -f && git reset && php artisan config:cache"
     },
     "devDependencies": {
         "axios": "^0.21",
