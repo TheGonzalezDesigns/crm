@@ -166,6 +166,9 @@ export default {
                 method: 'DELETE',
             }).then(() => {
                 this.fetchTasks(this.$store.getters.project.id);
+                //this.fetchTasks(this.$store.getters.project.id);
+                //this.$store.dispatch('fetchTasks', this.$store.getters.project.id);
+                //fetchTasks(this.$store.getters.project.id);
                 console.error('Task Deleted', id);
             }).catch((err) => console.error(err));
         },
