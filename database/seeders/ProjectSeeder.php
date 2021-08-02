@@ -21,8 +21,8 @@ class ProjectSeeder extends Seeder
             Projects::create([
                 'completed' => false,
                 'title' => $faker->unique()->word,
-                'PID' => Str::random(10),
                 'description' => $faker->unique()->text($maxNbChars = 200)
+                //'PID' => Str::random(10),
             ]);
         }
     }

@@ -13,14 +13,13 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            //$table->increments('id');
+            $table->id()->autoIncrement();
             $table->string("title");
             $table->string("description");
             $table->boolean("completed")->default(false);
-            $table->string("PID");
+            //$table->string("PID");
             $table->timestamps();
         });
     }
