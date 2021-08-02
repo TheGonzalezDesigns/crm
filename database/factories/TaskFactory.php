@@ -28,8 +28,6 @@ class TaskFactory extends Factory
         return [
             'project_id' => function() {
                 return Project::factory()->create()->id;
-                //return Project::factory()->count(1)->make();
-                //return factory(App\Project::class)->create()->id;
             },
             'title' => $faker->unique()->word(),
             'description' => $faker->paragraph(3, 2),
