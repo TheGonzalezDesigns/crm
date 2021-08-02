@@ -38,20 +38,20 @@
                                     mdb-col(col="10")
                                         mdb-input(label="Add a new task" size="md" v-model="newTask")
                                     mdb-col(col="2")
-                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="addTask(newTask)")
+                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="")
                                             mdb-icon(fa icon="plus" size="1x").green-text
                             mdb-container(fluid).no-gutters
                                 mdb-row.no-gutters.align-items-center.justify-content-center
                                     mdb-col.no-gutters
                                         mdb-list-group.task-list.no-gutters
-                                            mdb-list-group-item(v-for="task in tasks" :key="task.id")
+                                            mdb-list-group-item(v-for="task in this.$store.getters.tasks" :key="task.id")
                                                 mdb-container(fluid).task-list-item
                                                     mdb-row.task-list-item.align-items-center.justify-content-center
                                                         mdb-col(col="8")
                                                             mdb-container(fluid)
                                                                 mdb-row.align-items-center.justify-content-start
                                                                     mdb-col
-                                                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="deleteTask(task.taskId)")
+                                                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="")
                                                                             mdb-icon(fa icon="check" size="1x").green-text
                                                                     mdb-col.task-title(col="8")
                                                                         h5.h5-responsive.text-capitalize {{task.title}}
@@ -59,7 +59,7 @@
                                                             mdb-container(fluid)
                                                                 mdb-row.align-items-center.justify-content-center.text-center
                                                                     mdb-col
-                                                                        mdb-btn(tag='a' outline='danger' floating size='sm' @click="deleteTask(task.taskId)")
+                                                                        mdb-btn(tag='a' outline='danger' floating size='sm' @click="")
                                                                             mdb-icon(far icon="trash-alt" size="1x").red-text
                                         //mdb-accordion(table).task-list
                                             mdb-accordion-pane(:title='title(task.title)' type='table' :isOpen='openPaneNum==0' @pane-clicked='handlePaneOpened(0)' v-for="task in tasks" :key="task.id")
@@ -147,55 +147,52 @@ export default {
             openPaneNum: 0,
         }
     },
-    created(){
-        this.updateTasks();
-    },
     methods: {
-        updateTasks(){
-            fetch('/api/upcoming')
-                .then((res)=>res.json())
-                .then((data)=>{
-                    this.tasks = data.data;
-                    console.warn('updated with:', data);
-                })
-                .catch((err) => console.error(err)); //Implement an error message to display to the user
-        },
-        deleteTask(taskId) {
-            fetch(`/api/upcoming/${taskId}`, {
-                method: 'DELETE',
-            }).then(() => {
-                this.updateTasks();
-                console.log('Task Deleted', taskId);
-            }).catch((err) => console.error(err));
-        },
-        addTask(data) {
-            let taskId = Math.random().toString();
-            taskId = taskId.slice(2, taskId.length <= 12 ? taskId.length : 12 );
-
-            fetch(`/api/upcoming`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: data,
-                    taskId: taskId,
-                    completed: false,
-                    description: ''
-                })
-            }).then(() => {
-                this.updateTasks();
-                this.newTask = '';
-            }).catch((err) => console.error(err, taskId));
-        },
-        deleteTasks($taskId){
-            fetch('/api/upcoming/{$taskId}')
-                .then((res)=>res.json())
-                .then((data)=>{
-                    this.upcoming = data;
-                })
-                .catch((err) => console.log(err));
-        },
+        // updateTasks(){
+        //     fetch('/api/upcoming')
+        //         .then((res)=>res.json())
+        //         .then((data)=>{
+        //             this.tasks = data.data;
+        //             console.warn('updated with:', data);
+        //         })
+        //         .catch((err) => console.error(err)); //Implement an error message to display to the user
+        // },
+        // deleteTask(taskId) {
+        //     fetch(`/api/upcoming/${taskId}`, {
+        //         method: 'DELETE',
+        //     }).then(() => {
+        //         this.updateTasks();
+        //         console.log('Task Deleted', taskId);
+        //     }).catch((err) => console.error(err));
+        // },
+        // addTask(data) {
+        //     let taskId = Math.random().toString();
+        //     taskId = taskId.slice(2, taskId.length <= 12 ? taskId.length : 12 );
+        //
+        //     fetch(`/api/upcoming`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify({
+        //             title: data,
+        //             taskId: taskId,
+        //             completed: false,
+        //             description: ''
+        //         })
+        //     }).then(() => {
+        //         this.updateTasks();
+        //         this.newTask = '';
+        //     }).catch((err) => console.error(err, taskId));
+        // },
+        // deleteTasks($taskId){
+        //     fetch('/api/upcoming/{$taskId}')
+        //         .then((res)=>res.json())
+        //         .then((data)=>{
+        //             this.upcoming = data;
+        //         })
+        //         .catch((err) => console.log(err));
+        // },
         beforeEnter(el) {
             this.elHeight = el.scrollHeight;
         },
@@ -218,7 +215,7 @@ export default {
         title(data) {
             return data.toUpperCase();
         }
-    },
+    }
 }
 
 </script>

@@ -61,7 +61,15 @@ export default {
                 .then((res)=>res.json())
                 .then((data)=>{
                     this.projects = data.data;
-                    console.warn(this.projects)
+                })
+                .catch((err) => console.error(err));
+        },
+        getTasks(id) {
+            fetch('api/tasks/' + id)
+                .then((res) => res.json())
+                .then((data) => {
+                    console.warn("Project Tasks:\t", data.data)
+                    this.$store.commit("tasks", data.data);
                 })
                 .catch((err) => console.error(err));
         },
@@ -73,6 +81,7 @@ export default {
             return initials;
         },
         selectProject($project) {
+            this.getTasks($project.id);
             this.$store.commit("project", $project);
         }
     },
