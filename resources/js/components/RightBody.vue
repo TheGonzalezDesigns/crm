@@ -64,7 +64,7 @@
                                                             mdb-container(fluid)
                                                                 mdb-row.align-items-center.justify-content-center.text-center
                                                                     mdb-col
-                                                                        mdb-btn(tag='a' outline='danger' floating size='sm' @click="")
+                                                                        mdb-btn(tag='a' outline='danger' floating size='sm' @click="deleteTask(task.id)")
                                                                             mdb-icon(far icon="trash-alt" size="1x").red-text
                                         //mdb-accordion(table).task-list
                                             mdb-accordion-pane(:title='title(task.title)' type='table' :isOpen='openPaneNum==0' @pane-clicked='handlePaneOpened(0)' v-for="task in tasks" :key="task.id")
@@ -162,14 +162,22 @@ export default {
         //         })
         //         .catch((err) => console.error(err)); //Implement an error message to display to the user
         // },
-        // deleteTask(taskId) {
-        //     fetch(`/api/upcoming/${taskId}`, {
-        //         method: 'DELETE',
-        //     }).then(() => {
-        //         this.updateTasks();
-        //         console.log('Task Deleted', taskId);
-        //     }).catch((err) => console.error(err));
-        // },
+        fetchTasks(id) {
+            fetch(`api/tasks/${id}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    this.$store.commit("tasks", data.data);
+                })
+                .catch((err) => console.error(err));
+        },
+        deleteTask(id) {
+            fetch(`/api/task/${id}`, {
+                method: 'DELETE',
+            }).then(() => {
+                this.fetchTasks(this.$store.getters.project.id);
+                console.error('Task Deleted', id);
+            }).catch((err) => console.error(err));
+        },
         // addTask(data) {
         //     let taskId = Math.random().toString();
         //     taskId = taskId.slice(2, taskId.length <= 12 ? taskId.length : 12 );
