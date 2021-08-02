@@ -64,11 +64,10 @@ export default {
                 })
                 .catch((err) => console.error(err));
         },
-        getTasks(id) {
-            fetch('api/tasks/' + id)
+        fetchTasks(id) {
+            fetch(`api/tasks/${id}`)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.warn("Project Tasks:\t", data.data)
                     this.$store.commit("tasks", data.data);
                 })
                 .catch((err) => console.error(err));
@@ -81,16 +80,13 @@ export default {
             return initials;
         },
         selectProject($project) {
-            this.getTasks($project.id);
+            this.fetchTasks($project.id);
             this.$store.commit("project", $project);
         }
     },
     computed: {
         filterProjects: function() {
-            let search = this.projects.filter(project => project.title.toLowerCase().includes(this.search.toLowerCase()));
-            console.warn(search);
-            return search;
-            //return this.projects.filter(project => project.title.toLowerCase().includes(this.search.toLowerCase()));
+            return this.projects.filter(project => project.title.toLowerCase().includes(this.search.toLowerCase()));
         }
     }
 }
