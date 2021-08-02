@@ -37,26 +37,6 @@ Route::delete('/upcoming/{taskId}', function ($taskId){
    return 204;
 });
 
-Route::get('/dailytask', function (){
-    $today = \App\Models\Today::all();
-
-    return \App\Http\Resources\TodayTaskResource::collection($today);
-});
-
-Route::post('/dailytask', function (Request $request){
-    return \App\Models\Today::create([
-        'title' => $request->title,
-        'taskId' => $request->taskId,
-        'waiting' => $request->waiting
-    ]);
-});
-
-
-Route::delete('/dailytask/{taskId}', function ($taskId){
-    \Illuminate\Support\Facades\DB::table('todays')->where('taskId', $taskId)->delete();
-    return 204;
-});
-
 Route::get('/projects', function (){
     $projects = \App\Models\Project::all();
 
