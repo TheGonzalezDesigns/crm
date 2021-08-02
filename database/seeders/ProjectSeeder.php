@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Projects;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -18,7 +18,7 @@ class ProjectSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         for($i = 0; $i<10; $i++) {
-            Projects::create([
+            Project::create([
                 'completed' => false,
                 'title' => $faker->unique()->word,
                 'description' => $faker->unique()->text($maxNbChars = 200)

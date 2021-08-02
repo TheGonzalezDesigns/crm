@@ -22,7 +22,6 @@ class UpcomingSeeder extends Seeder
                 'completed' => false,
                 'title' => $faker->unique()->word,
                 'taskId' => Str::random(10),
-                'project_id' => $faker->randomDigitNotNull(),
                 //'description' => $faker->unique()->text($maxNbChars = 200)
             ]);
         }

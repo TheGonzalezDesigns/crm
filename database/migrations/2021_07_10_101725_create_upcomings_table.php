@@ -20,8 +20,6 @@ class CreateUpcomingsTable extends Migration
             //$table->string("description");
             $table->string("taskId");
             $table->timestamps();
-            $table->unsignedBigInteger('project_id')->nullable();
-            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete();
         });
     }
 

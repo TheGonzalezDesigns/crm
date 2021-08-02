@@ -58,9 +58,9 @@ Route::delete('/dailytask/{taskId}', function ($taskId){
 });
 
 Route::get('/projects', function (){
-    $projects = \App\Models\Projects::all();
+    $projects = \App\Models\Project::all();
 
-    return \App\Http\Resources\ProjectsResource::collection($projects);
+    return \App\Http\Resources\ProjectResource::collection($projects);
 });
 
 //Route::get('/projects', function (){
@@ -75,7 +75,7 @@ Route::get('/projects', function (){
 //});
 
 Route::post('/projects', function (Request $request){
-    return \App\Models\Projects::create([
+    return \App\Models\Project::create([
         'title' => $request->title,
         'PID' => $request->PID,
         'completed' => $request->completed
