@@ -28,7 +28,7 @@
                                                 mdb-icon(icon="tasks" fa size="1x").m-1.grey-text
                                             span Today's Tasks
                                             span &ensp;
-                                            span.grey-text
+                                            span.grey-text(v-if="this.$store.getters.tasks.length")
                                                 span (
                                                 span(v-text="this.$store.getters.tasks.length")
                                                 span )
@@ -153,15 +153,6 @@ export default {
         }
     },
     methods: {
-        // updateTasks(){
-        //     fetch('/api/upcoming')
-        //         .then((res)=>res.json())
-        //         .then((data)=>{
-        //             this.tasks = data.data;
-        //             console.warn('updated with:', data);
-        //         })
-        //         .catch((err) => console.error(err)); //Implement an error message to display to the user
-        // },
         fetchTasks(id) {
             fetch(`api/tasks/${id}`)
                 .then((res) => res.json())
