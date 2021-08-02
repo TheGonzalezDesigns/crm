@@ -1,0 +1,4 @@
+./migrations/2021_07_10_101725_create_upcomings_table.php
+./migrations/2021_07_10_101725_create_upcomings_table.php
+./seeders/UpcomingSeeder.php
+./seeders/UpcomingSeeder.php
