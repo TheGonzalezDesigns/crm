@@ -27,6 +27,11 @@
                                             span
                                                 mdb-icon(icon="tasks" fa size="1x").m-1.grey-text
                                             span Today's Tasks
+                                            span &ensp;
+                                            span.grey-text
+                                                span (
+                                                span(v-text="this.$store.getters.tasks.length")
+                                                span )
                                 mdb-row
                                     mdb-col
                                         ul.task-list
