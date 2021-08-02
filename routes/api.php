@@ -18,20 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::get('/upcoming', function (){
-//  $upcoming = \App\Models\Upcoming::all();
-//
-//  return \App\Http\Resources\UpcomingResource::collection($upcoming);
-//});
-//
-//Route::post('/upcoming', function (Request $request){
-//    return \App\Models\Upcoming::create([
-//        'title' => $request->title,
-//        'taskId' => $request->taskId,
-//        'completed' => $request->completed
-//    ]);
-//});
-
 Route::get('/projects', function (){
     $projects = \App\Models\Project::all();
 
@@ -51,11 +37,22 @@ Route::get('/tasks/{id}', function ($id){
     return \App\Http\Resources\ProjectResource::collection($tasks);
 });
 
-
 Route::get('/task/{id}', function ($id){
     $task = \App\Models\Task::query()->findOrFail($id);
 
     return $task;
+});
+
+//Route::post('/task/{id}', function ($id, $data){
+//    $task = \App\Models\Task::query()->findOrFail($id);
+//    $task->title = $data->title;
+//    return $task;
+//});
+
+Route::delete('/task/{id}', function ($id){
+    $task = \App\Models\Task::query()->findOrFail($id);
+    $task->delete();
+    return 204;
 });
 
 //Route::delete('/projects/{PID}', function ($PID){
