@@ -155,8 +155,8 @@ export default {
         }
     },
     methods: {
-        fetchTasks(id) {
-            fetch(`api/tasks/${id}`)
+        fetchTasks() {
+            fetch(`api/tasks/${this.$store.getters.project.id}`)
                 .then((res) => res.json())
                 .then((data) => {
                     this.$store.commit("tasks", data.data);
@@ -176,20 +176,22 @@ export default {
                     project_id: id
                 })
             }).then(() => {
-                this.updateTasks();
-                this.newTask.title = '';
+                this.fetchTasks();
+                this.resetNewTask();
             }).catch((err) => console.error(err, taskId));
         },
         deleteTask(id) {
             fetch(`/api/task/${id}`, {
                 method: 'DELETE',
             }).then(() => {
-                this.fetchTasks(this.$store.getters.project.id);
-                //this.fetchTasks(this.$store.getters.project.id);
-                //this.$store.dispatch('fetchTasks', this.$store.getters.project.id);
-                //fetchTasks(this.$store.getters.project.id);
+                this.fetchTasks();
                 console.error('Task Deleted', id);
             }).catch((err) => console.error(err));
+        },
+        resetNewTask() {
+            this.newTask = {
+                title: ''
+            }
         },
         beforeEnter(el) {
             this.elHeight = el.scrollHeight;
