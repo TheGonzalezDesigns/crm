@@ -43,11 +43,14 @@ Route::get('/task/{id}', function ($id){
     return $task;
 });
 
-//Route::post('/task/{id}', function ($id, $data){
-//    $task = \App\Models\Task::query()->findOrFail($id);
-//    $task->title = $data->title;
-//    return $task;
-//});
+Route::post('/task/add/{id}', function ($id, $data){
+    $faker = \Faker\Factory::create();
+    $task = \App\Models\Task::factory()->create(['project_id' => $id]);
+    $task->title = $data->title;
+    $task->description = $data->description;
+    $task->completed = $data->completed;
+    return $task;
+});
 
 Route::delete('/task/{id}', function ($id){
     $task = \App\Models\Task::query()->findOrFail($id);
