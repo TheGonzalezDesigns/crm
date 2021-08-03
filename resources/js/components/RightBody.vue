@@ -41,9 +41,9 @@
                             mdb-container(fluid)
                                 mdb-row.align-items-center
                                     mdb-col(col="10")
-                                        mdb-input(label="Add a new task" size="md" v-model="newTask")
+                                        mdb-input(label="Add a new task" size="md" v-model="newTask.title")
                                     mdb-col(col="2")
-                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="")
+                                        mdb-btn(tag='a' outline='success' floating size='sm' @click="addTask(newTask.title, this.$store.getters.project.id)")
                                             mdb-icon(fa icon="plus" size="1x").green-text
                             mdb-container(fluid).no-gutters
                                 mdb-row.no-gutters.align-items-center.justify-content-center
@@ -146,7 +146,9 @@ export default {
     data(){
         return {
             tasks: [],
-            newTask: "",
+            newTask: {
+                title: ''
+            },
             project: {},
             elHeight: 0,
             openPaneNum: 0,
@@ -161,6 +163,23 @@ export default {
                 })
                 .catch((err) => console.error(err));
         },
+        addTask(data, id) {
+            fetch(`/api/task/add/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: data,
+                    completed: false,
+                    description: '',
+                    project_id: id
+                })
+            }).then(() => {
+                this.updateTasks();
+                this.newTask.title = '';
+            }).catch((err) => console.error(err, taskId));
+        },
         deleteTask(id) {
             fetch(`/api/task/${id}`, {
                 method: 'DELETE',
@@ -172,34 +191,6 @@ export default {
                 console.error('Task Deleted', id);
             }).catch((err) => console.error(err));
         },
-        // addTask(data) {
-        //     let taskId = Math.random().toString();
-        //     taskId = taskId.slice(2, taskId.length <= 12 ? taskId.length : 12 );
-        //
-        //     fetch(`/api/upcoming`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             title: data,
-        //             taskId: taskId,
-        //             completed: false,
-        //             description: ''
-        //         })
-        //     }).then(() => {
-        //         this.updateTasks();
-        //         this.newTask = '';
-        //     }).catch((err) => console.error(err, taskId));
-        // },
-        // deleteTasks($taskId){
-        //     fetch('/api/upcoming/{$taskId}')
-        //         .then((res)=>res.json())
-        //         .then((data)=>{
-        //             this.upcoming = data;
-        //         })
-        //         .catch((err) => console.log(err));
-        // },
         beforeEnter(el) {
             this.elHeight = el.scrollHeight;
         },
