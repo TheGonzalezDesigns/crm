@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Project;
-use App\Models\Task;
 use Illuminate\Database\Seeder;
 
-class ProjectSeeder extends Seeder
+class TaskSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +13,9 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        Project::factory(50)->has(
-            Task::factory(rand(10,30))
-        )->create();
+        $Q = rand(3,100);
+        $I = rand(1,50);
+
+        \App\Models\Task::factory($Q)->create(['project_id' => I]);
     }
 }

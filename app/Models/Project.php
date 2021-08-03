@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-//    use HasFactory;
-//    protected $guarded = [];
+    use HasFactory;
+    protected $guarded = [];
 
     public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

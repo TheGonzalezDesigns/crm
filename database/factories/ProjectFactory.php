@@ -25,7 +25,7 @@ class ProjectFactory extends Factory
 
         return [
             'title' => $faker->unique()->word(),
-            'description' => $faker->paragraph(3, 2),
+            'description' => $faker->paragraph(10, 2),
             'completed' => false,
         ];
     }
